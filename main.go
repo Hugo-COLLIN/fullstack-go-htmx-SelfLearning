@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -20,6 +21,10 @@ func main() {
 		}
 
 		tmpl.Execute(w, data)
+	})
+
+	http.HandleFunc("/time", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Current time : " + time.Now().Format(time.RFC1123)))
 	})
 
 	fmt.Println("Started http server on port :8080")

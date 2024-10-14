@@ -12,6 +12,8 @@
 <main>
   <h1>Go + HTMX Demo</h1>
   <h2>{{.Message}}</h2>
+  <button hx-get="/time" hx-target="#time">Get current time</button>
+  <div id="time">Will show current time</div>
 </main>
 </body>
 </html>
