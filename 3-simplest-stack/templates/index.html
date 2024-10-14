@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="https://unpkg.com/htmx.org@2.0.3"
+          integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq"
+          crossorigin="anonymous"></script>
   <title>Title</title>
 </head>
 <body>
-<h1>Hello, {{.name}}!</h1>
+<h1>Tasks</h1>
+<ul id="tasks">
+  {{range .todos}}
+  <li>
+    {{.Title}} - {{.Status}}
+    <button hx-delete="/todos/{{.Id}}" hx-target="closest li" hx-swap="outerHTML">Delete</button>
+  </li>
+  {{else}}
+  <li>No tasks found</li>
+  {{end}}
+</ul>
+<form
+    hx-post="/todos"
+    hx-target="#tasks"
+    hx-swap="beforeend">
+  <input name="title" placeholder="Task title">
+  <input name="status" placeholder="Task status">
+  <button>Save</button>
+
+</form>
 </body>
 </html>
