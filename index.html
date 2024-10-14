@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Go HTMX</title>
+</head>
+<body>
+<main>
+  <h1>Go HTMX</h1>
+  <ul>
+    {{range .Todos}}
+    <li>{{.Message}}</li>
+    {{end}}
+  </ul>
+</main>
+</body>
+</html>
