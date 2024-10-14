@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/glebarez/sqlite"
 )
 
 type ToDo struct {
@@ -17,7 +17,7 @@ var DB *sql.DB
 
 func InitDatabase() {
 	var err error
-	DB, err = sql.Open("sqlite3", "./todo.db")
+	DB, err = sql.Open("sqlite", "./todo.db")
 	if err != nil {
 		log.Fatal(err)
 	}

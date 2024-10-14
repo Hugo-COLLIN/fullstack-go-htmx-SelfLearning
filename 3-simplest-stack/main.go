@@ -15,7 +15,7 @@ func main() {
 
 	e.GET("/", func(c *gin.Context) {
 		todos := ReadToDoList()
-		c.HTML(http.StatusOK, "index.html", gin.H{
+		c.HTML(http.StatusOK, "task.html", gin.H{
 			"todos": todos,
 		})
 	})
