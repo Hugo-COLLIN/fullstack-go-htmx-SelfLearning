@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://unpkg.com/htmx.org@2.0.3"
+          integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Go HTMX</title>
+</head>
+<body>
+<main>
+  <h1>Go HTMX</h1>
+  <ul id="todo-list">
+    {{range .Todos}}
+    {{block "todo-list-element" .}}
+    <li class="rounded-lg border bg-card text-card-foreground shadow-sm">{{.Message}}</li>
+    {{end}}
+    {{end}}
+  </ul>
+
+  <form hx-target="#todo-list" hx-swap="beforeend" hx-post="/add-todo">
+    <label for="message">Message</label>
+    <input type="text" id="message" name="message" class="flex h-10 w-full rounded-md border border-input bg-background px-3
+    py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium
+    file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2
+    focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+    <button type="submit"
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+      Create
+    </button>
+  </form>
+</main>
+</body>
+</html>
