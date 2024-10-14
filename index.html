@@ -2,16 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
   <title>Go HTMX</title>
 </head>
 <body>
 <main>
   <h1>Go HTMX</h1>
-  <ul>
+  <ul id="todo-list">
     {{range .Todos}}
-    <li>{{.Message}}</li>
+      {{block "todo-list-element" .}}
+        <li>{{.Message}}</li>
+      {{end}}
     {{end}}
   </ul>
+
+  <form hx-target="#todo-list" hx-swap="beforeend" hx-post="/add-todo">
+    <label for="message">Message</label>
+    <input type="text" id="message" name="message">
+    <button type="submit">Create</button>
+  </form>
 </main>
 </body>
 </html>

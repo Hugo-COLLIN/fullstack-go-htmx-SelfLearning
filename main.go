@@ -25,7 +25,18 @@ func main() {
 		tpl := template.Must(template.ParseFiles("index.html"))
 		tpl.Execute(w, data)
 	}
+
+	addTodoHandler := func(w http.ResponseWriter, r *http.Request) {
+		msg := r.PostFormValue("message")
+		tpl := template.Must(template.ParseFiles("index.html"))
+		todo := Todo{Id: len(data["Todos"]) + 1, Message: msg}
+		data["Todos"] = append(data["Todos"], todo)
+
+		tpl.ExecuteTemplate(w, "todo-list-element", todo)
+	}
+
 	http.HandleFunc("/", todosHandler)
+	http.HandleFunc("/add-todo", addTodoHandler)
 
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
