@@ -2,14 +2,16 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func main() {
 	e := gin.Default()
+	e.LoadHTMLGlob("templates/*")
 
 	e.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"name": "Awesome",
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"name": "Hugo",
 		})
 	})
 
